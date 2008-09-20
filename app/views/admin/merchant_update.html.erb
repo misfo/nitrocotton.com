@@ -1,0 +1,6 @@
+<p>There are <%= pluralize(@new_urls.size, "new url") %>!</p>
+<% @new_urls.each_with_index do |url, i| -%>
+  <div id="shirt_<%= i %>">
+    <%= link_to_remote(url, :url => { :action => "fetch_shirt_info", :merchant_id => @merchant.id, :url => url, :i => i }) %>
+  </div>
+<% end -%>

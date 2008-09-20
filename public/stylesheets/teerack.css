@@ -1,0 +1,58 @@
+body {
+  font: 0.9em Verdana, sans-serif;
+}
+
+a img {
+  border: 0;
+}
+
+#main, #top_navigation {
+  width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#top_navigation {
+  height: 80px;
+}
+#top_navigation .adsense {
+  float: right;
+}
+
+/* index page */
+.tee_tile {
+  float: left;
+  width: 200px;
+  padding: 10px;
+}
+.tee_tile img.tee {
+  display: block;
+}
+.tee_tile .name {
+  display: block;
+}
+.tee_tile .comment_count {
+  font-size: 0.8em;
+}
+.tee_tile .vote {
+  float: right;
+}
+.tee_tile .vote a.voted, .tee_tile .vote a.vote:hover {
+  background-color: orange;
+}
+
+/* show page */
+#shirt_info {
+  float: right;
+  width: 300px;
+}
+
+#shirt_container {
+  width: 500px;
+  padding-right: 15px;
+  text-align: center;
+}
+#shirt_container img {
+  border: 1px solid #CCCCCC;
+}
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title><%= yield(:title) || "nitrocotton.com: find t-shirts that explode your torso off" %></title>
+    <meta name="keywords" content="<%= yield(:keywords) || "t-shirts, tshirts, shirts, tees" %>" />
+    <meta name="description" content="<%= yield(:description) || "Find the best t-shirts on the internet" %>" />
+    <%= stylesheet_link_tag 'teerack' %>
+    <%= javascript_include_tag 'prototype' %>
+  </head>
+  <body>
+    <div id="top_navigation">
+      <div class="adsense">
+        <iframe style="border: 1px solid gray; height: 60px; width: 468px;"></iframe>
+      </div>
+      <%= image_tag 'logo.gif' %>
+    </div>
+    <div id="main">
+      <%= yield %>
+    </div>
+  </body>
+</html>
+

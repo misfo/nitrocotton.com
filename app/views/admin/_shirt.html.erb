@@ -1,0 +1,24 @@
+<div style="border: 1px solid #00000;">
+  <img src="<%= shirt.image_url %>" />
+  
+  <h3><%= shirt.name %></h3>
+  
+  <p><strong>Min Price:</strong> <%= shirt.min_price %></p>
+  <p><strong>Max Price:</strong> <%= shirt.max_price %></p>
+  
+  <p><%= shirt.description %></p>
+
+  <div id="shirt_form_<%= params[:i] %>">
+    <% remote_form_for(shirt) do |f| -%>
+      <%= hidden_field_tag :i, params[:i] %>
+      <%= f.hidden_field :merchant_url %>
+      <%= f.hidden_field :merchant_id %>
+      <%= f.hidden_field :image_url %>
+      <%= f.hidden_field :name %>
+      <%= f.hidden_field :min_price %>
+      <%= f.hidden_field :max_price %>
+      <%= f.hidden_field :description %>
+      <%= f.submit "Save" %>
+    <% end -%>
+  </div>
+</div>

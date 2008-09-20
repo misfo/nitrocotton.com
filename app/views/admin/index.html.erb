@@ -1,0 +1,3 @@
+<% for merchant in Merchant.find(:all) -%>
+  <p><%= link_to(merchant.name, :action => "merchant_update", :id => merchant.id) %></p>
+<% end -%>

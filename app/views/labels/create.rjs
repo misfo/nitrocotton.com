@@ -1,0 +1,1 @@
+page["shirt_form_#{params[:i]}"].replace_html :partial => "form", :locals => {:shirt => @shirt}

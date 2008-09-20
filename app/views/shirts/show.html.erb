@@ -1,0 +1,14 @@
+<div id="shirt_info">
+  <h3>
+    "<%= @shirt.name %>" from
+    <a href="<%= @shirt.merchant.homepage_url %>" target="_blank"><%= @shirt.merchant.name %></a>
+  </h3>
+  <div>
+    <strong>Site's description</strong>
+    <p><%= @shirt.description || "<em>None available</em>" %></p>
+  </div>
+</div>
+<div id="shirt_container">
+  <a href="<%= @shirt.merchant_url %>" target="_blank"><%= image_tag @shirt.image.public_filename %></a>
+</div>
+

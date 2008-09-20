@@ -1,0 +1,3 @@
+page["thumb_#{@vote.vote > 0 ? 'up' : 'down'}_#{@vote.shirt_id}"].add_class_name "voted"
+page["thumb_#{@vote.vote < 0 ? 'up' : 'down'}_#{@vote.shirt_id}"].remove_class_name "voted"
+

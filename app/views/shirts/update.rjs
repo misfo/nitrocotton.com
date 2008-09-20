@@ -1,0 +1,2 @@
+page["shirt_#{params[:i]}"].replace_html "Saved!"
+page["shirt_#{params[:i]}"].scroll_to

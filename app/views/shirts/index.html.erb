@@ -1,0 +1,18 @@
+<% for shirt in @shirts %>
+  <div class="tee_tile">
+    <%= link_to(image_tag(shirt.image.public_filename(:thumb)), shirt.merchant_url,
+      :class => 'tee', :popup => true) %>
+    <span class="name"><%= truncate(shirt.name, 25) %></span>
+    <span class="vote">
+      <%= link_to_remote(image_tag('thumb_up_28.png'),
+        :url => shirt_votes_path(shirt, :vote => 1), :method => :post,
+        :html => { :class => "vote#{' voted' if (shirt_vote = shirt.votes.by(current_user)) == 1}", :id => "thumb_up_#{shirt.id}" }) %>
+      <%= link_to_remote(image_tag('thumb_down_28.png'),
+        :url => shirt_votes_path(shirt, :vote => -1), :method => :post,
+        :html => { :class => "vote#{' voted' if shirt_vote == -1}", :id => "thumb_down_#{shirt.id}" }) %>
+    </span>
+    <%= link_to(shirt.comments.size.zero? ? "No comments yet" : pluralize(shirt.comments.size, "comment"),
+      shirt_url(shirt), :class => 'comment_count') %>
+  </div>
+<% end %>
+

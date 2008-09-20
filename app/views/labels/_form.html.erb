@@ -1,0 +1,18 @@
+<% remote_form_for(shirt) do |f| -%>
+  <%= hidden_field_tag :i, params[:i] %>
+<% for label in Label.find(:all, :order => "name") -%>
+  <p>
+    <%= check_box_tag "shirt[label_ids][]", label.id, false, :id => "shirt_label_id_#{label.id}" %>
+    <label for="shirt_label_id_<%= label.id %>"><%= label.name %></label>
+  </p>
+<% end -%>
+  <p><%= f.submit "Save" %></p>
+<% end -%>
+
+<% remote_form_for(Label.new) do |f| -%>
+  <%= hidden_field_tag :shirt_id, @shirt.id %>
+  <%= hidden_field_tag :i, params[:i] %>
+  Create a new label
+  <%= f.text_field :name %>
+  <%= f.submit "Create Label" %>
+<% end -%>
