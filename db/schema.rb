@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 11) do
+ActiveRecord::Schema.define(:version => 12) do
 
   create_table "comments", :force => true do |t|
     t.integer  "shirt_id"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 11) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "merchant_id"
+    t.text     "text"
   end
 
   add_index "shirts", ["merchant_url"], :name => "index_shirts_on_merchant_url", :unique => true
