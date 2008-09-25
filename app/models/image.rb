@@ -6,7 +6,8 @@ class Image < ActiveRecord::Base
   has_attachment :content_type => :image,
                  :resize_to => '450x550>',
                  :thumbnails => {:thumb => '200x200!'},
-                 :path_prefix => 'public/images/shirts'
+                 :processor => 'Rmagick',
+                 :storage => defined?(HerokuApp) ? 'heroku' : 'file_system'
 
   def self.create_from_url(url)
     returning image = new(:original_url => url) do
