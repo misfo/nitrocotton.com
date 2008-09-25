@@ -1,8 +1,8 @@
 <% for shirt in @shirts %>
   <div class="tee_tile">
-    <%= link_to(image_tag(shirt.image.public_filename(:thumb)), shirt.merchant_url,
+    <%= link_to(image_tag(shirt.image.public_filename(:thumb), :alt => shirt.text), shirt.merchant_url,
       :class => 'tee', :popup => true) %>
-    <span class="name"><%= truncate(shirt.name, 25) %></span>
+<!--    <span class="name"><%= truncate(shirt.name, 25) %></span> -->
     <span class="vote">
       <%= link_to_remote(image_tag('thumb_up_28.png'),
         :url => shirt_votes_path(shirt, :vote => 1), :method => :post,

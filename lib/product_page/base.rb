@@ -36,6 +36,10 @@ class ProductPage::Base
     @url = product_url
     @page = Hpricot(open(url))
   end
+  
+  def text_clue
+    name
+  end
 
   def save!
     product = Shirt.find_or_initialize_by_merchant_url(url)

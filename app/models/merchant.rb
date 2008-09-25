@@ -8,7 +8,8 @@ class Merchant < ActiveRecord::Base
         :description => page.description,
         :min_price => page.min_price,
         :max_price => page.max_price,
-        :image_url => page.image_url
+        :image_url => page.image_url,
+        :text => page.text_clue
       )
     end
   end

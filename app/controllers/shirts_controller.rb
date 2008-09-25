@@ -1,6 +1,6 @@
 class ShirtsController < ApplicationController
   def index
-    @shirts = Shirt.find(:all, :include => [:image, :votes, :comments], :limit => 16, :order => "RANDOM()")
+    @shirts = Shirt.find(:all, :include => [:image, :votes, :comments], :limit => 8, :order => "RANDOM()")
   end
 
   def show
