@@ -12,11 +12,21 @@ class Shirt < ActiveRecord::Base
 
   validates_uniqueness_of :merchant_url
 
+  after_create :associate_labels
   after_save :download_image
 
   attr_accessor :image_url
+  attr_accessor :label_names
 
 protected
+  def associate_labels
+    unless @label_names.blank?
+      for label in @label_names.split(",")
+        labels << Label.find_or_create_by_name(label.strip) unless label.blank?
+      end
+    end
+  end
+
   def download_image
     if @image_url
       image = build_image
