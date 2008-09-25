@@ -1,5 +1,3 @@
-require 'open-uri'
-
 class ProductPage::BustedTees < ProductPage::Base
   class << self
     def merchant_name() "Busted Tees" end

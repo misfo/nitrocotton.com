@@ -1,13 +1,11 @@
-require 'feed-normalizer'
-
 class ProductPage::Threadless < ProductPage::Base
   class << self
     def merchant_name() "Threadless" end
 
     def urls
-      in_stock_feed = FeedNormalizer::FeedNormalizer.parse(
-        open("http://feeds.feedburner.com/ThreadlessInStock"))
-      in_stock_feed.entries.collect {|entry| entry.urls.first }
+      typetees_page = Hpricot(open("http://www.threadless.com/catalog/line,typetees"))
+      links = (typetees_page / ".catalog_titleby a")
+      links.collect {|a| "http://www.threadless.com#{a[:href]}" }
     end
   end
 
@@ -23,9 +21,11 @@ class ProductPage::Threadless < ProductPage::Base
   end
 
   def prices
-    @prices ||= (@page / "div.product_stock_price img").collect do |img|
-      img[:alt].gsub(/\$/, "").to_i
-    end
+    @prices ||= (@page / ".product_type img").collect do |img|
+      if img[:src] =~ /\/price\/(\d+)\.[a-z]{3}$/
+        $1.to_i
+      end
+    end.compact
   end
 
   def min_price
