@@ -1,4 +1,0 @@
-development:
-  adapter: sqlite3
-  dbfile: db/dev.db
-

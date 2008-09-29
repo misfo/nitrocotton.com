@@ -14,6 +14,16 @@ class Shirt < ActiveRecord::Base
 
   after_create :associate_labels
   after_save :download_image
+  
+  class << self
+    def word_frequencies
+      find(:all).inject({}) do |w, shirt|
+        shirt_words = shirt.text.downcase.scan(/[\w']+/).uniq
+        shirt_words.each {|sw| w[sw] = w[sw] ? (w[sw] + 1) : 1 }
+        w
+      end
+    end
+  end
 
   attr_accessor :image_url
   attr_accessor :label_names
