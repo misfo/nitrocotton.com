@@ -1,3 +1,5 @@
+There are <%= pluralize(Shirt.count, "shirt") %> in the database.
+
 <% for merchant in Merchant.find(:all) -%>
   <p><%= link_to(merchant.name, :action => "merchant_update", :id => merchant.id) %></p>
 <% end -%>
