@@ -16,12 +16,13 @@ class Shirt < ActiveRecord::Base
   after_save :download_image
   
   class << self
-    def word_frequencies
-      find(:all).inject({}) do |w, shirt|
-        shirt_words = shirt.text.downcase.scan(/[\w']+/).uniq
-        shirt_words.each {|sw| w[sw] = w[sw] ? (w[sw] + 1) : 1 }
-        w
-      end
+    def word_frequencies(freq_min = 2)
+      find(:all).inject({}) do |words, shirt|
+        shirt_words = shirt.text.downcase.scan(/[\w']{2,}/).uniq
+        shirt_words -= %w(and are in it of that the to)
+        shirt_words.each {|word| words[word] = (words[word] || 0) + 1 }
+        words
+      end.select {|w, f| f >= freq_min }.sort_by {|w, f| [-f, w] }
     end
   end
 
