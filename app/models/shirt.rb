@@ -19,7 +19,7 @@ class Shirt < ActiveRecord::Base
     def word_frequencies(freq_min = 2)
       find(:all).inject({}) do |words, shirt|
         shirt_words = shirt.text.downcase.scan(/[\w']{2,}/).uniq
-        shirt_words -= %w(and are in it of that the to)
+        shirt_words -= %w(and are have if in is it it's me my of or that the this to you)
         shirt_words.each {|word| words[word] = (words[word] || 0) + 1 }
         words
       end.select {|w, f| f >= freq_min }.sort_by {|w, f| [-f, w] }
