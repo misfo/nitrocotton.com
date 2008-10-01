@@ -16,11 +16,20 @@ class Shirt < ActiveRecord::Base
   after_save :download_image
   
   class << self
-    def find_random(options)
+    def find_all_with_preference(options)
       returning(shirts = []) do
         options[:order] = "RANDOM()"
         avoid_ids = options.delete(:avoid_ids)
-        unless avoid_ids.blank?
+        prefer_high_rated = options.delete(:prefer_high_rated)
+        if prefer_high_rated
+          top_16_ids = Vote.sum(:vote,
+            :group => :shirt_id,
+            :conditions => ["created_at > ?", 1.week.ago],
+            :order => "sum_vote DESC",
+            :limit => 16).collect(&:first)
+          shirts.push(*find(top_16_ids - (avoid_ids || []), options))
+        end
+        if shirts.size < options[:limit] && !avoid_ids.blank?
           with_scope(:find => {:conditions => ["shirts.id NOT IN (?)", avoid_ids]}) do
             shirts.push(*find(:all, options))
           end

@@ -14,6 +14,10 @@ class UserSession
     end
   end
   
+  def impress_me?
+    viewed_shirt_ids.size < 16
+  end
+  
   def viewed_shirts(shirts)
     @session[:viewed_shirt_ids] = @session[:viewed_shirt_ids] | shirts.collect(&:id)
   end

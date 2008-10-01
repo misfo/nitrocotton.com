@@ -2,7 +2,9 @@ class ShirtsController < ApplicationController
   after_filter :record_shirts_viewed, :only => :index
   
   def index
-    @shirts = Shirt.find_random(:avoid_ids => user_session.viewed_shirt_ids,
+    @shirts = Shirt.find_all_with_preference(
+      :prefer_high_rated => user_session.impress_me?,
+      :avoid_ids => user_session.viewed_shirt_ids,
       :include => [:image, :votes],
       :limit => 8)
   end
