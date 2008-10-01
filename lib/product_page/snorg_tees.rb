@@ -36,11 +36,9 @@ class ProductPage::SnorgTees < ProductPage::Base
  
   def image_url
     thumbnails_iframe = (@page / "iframe").detect {|iframe| iframe[:name] == 'i_thumb' }
-    thumbnails_page = Hpricot(open("http://www.snorgtees.com/#{thumbnails_iframe[:src]}"))
-    link = (thumbnails_page / "a").each do |a|
-      if a[:href] =~ /^i_fullpic.php\?pi_fullpic=(\w+_1.gif)$/
-        return "http://www.snorgtees.com/images/#{$1}"
-      end
-    end
+    thumbnails_page = open("http://www.snorgtees.com/#{thumbnails_iframe[:src]}").read
+    filenames = thumbnails_page.scan(/['"]i_fullpic.php\?pi_fullpic=([^"']+)/).flatten
+    filename = filenames.detect {|fn| fn =~ /\.gif$/i } || filenames[1]
+    "http://www.snorgtees.com/images/#{filename}"
   end
 end
