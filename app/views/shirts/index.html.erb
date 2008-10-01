@@ -11,8 +11,12 @@
         :url => shirt_votes_path(shirt, :vote => -1), :method => :post,
         :html => { :class => "vote#{' voted' if shirt_vote == -1}", :id => "thumb_down_#{shirt.id}" }) %>
     </span>
+    $<%= shirt.min_price %><br />
+    <%= link_to(shirt.merchant.name, shirt.merchant_url) %>
+<!--
     <%= link_to(shirt.comments.size.zero? ? "No comments yet" : pluralize(shirt.comments.size, "comment"),
       shirt_url(shirt), :class => 'comment_count') %>
+-->
   </div>
 <% end %>
 

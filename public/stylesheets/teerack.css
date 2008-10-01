@@ -1,6 +1,9 @@
 body {
   font: 0.9em Verdana, sans-serif;
 }
+a, a:visited {
+  color: #231F20;
+}
 
 a img {
   border: 0;
