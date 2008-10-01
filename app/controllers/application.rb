@@ -11,16 +11,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # :secret => 'aeb5c6068c4317d66f4abcffcc2045d5'
 
   protected
+    def user_session
+      @user_session ||= UserSession.new(session, request)
+    end
+    
     def current_user
-      if @current_user.nil?
-        if session[:user_id]
-          @current_user = User.find(session[:user_id])
-        else
-          @current_user = User.find_or_create_by_ip_address(request.remote_ip)
-          session[:user_id] = @current_user.id
-        end
-      end
-      @current_user
+      user_session.user
     end
 
     # potentially saves a database call over current_user.id

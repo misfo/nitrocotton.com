@@ -16,6 +16,21 @@ class Shirt < ActiveRecord::Base
   after_save :download_image
   
   class << self
+    def find_random(options)
+      returning(shirts = []) do
+        options[:order] = "RANDOM()"
+        avoid_ids = options.delete(:avoid_ids)
+        unless avoid_ids.blank?
+          with_scope(:find => {:conditions => ["shirts.id NOT IN (?)", avoid_ids]}) do
+            shirts.push(*find(:all, options))
+          end
+        end
+        if shirts.size < options[:limit]
+          shirts.push(*find(:all, options.merge(:limit => options[:limit] - shirts.size)))
+        end
+      end
+    end
+    
     def word_frequencies(freq_min = 2)
       find(:all).inject({}) do |words, shirt|
         shirt_words = shirt.text.downcase.scan(/[\w']{2,}/).uniq

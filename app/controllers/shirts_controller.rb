@@ -1,6 +1,10 @@
 class ShirtsController < ApplicationController
+  after_filter :record_shirts_viewed, :only => :index
+  
   def index
-    @shirts = Shirt.find(:all, :include => [:image, :votes, :comments], :limit => 8, :order => "RANDOM()")
+    @shirts = Shirt.find_random(:avoid_ids => user_session.viewed_shirt_ids,
+      :include => [:image, :votes],
+      :limit => 8)
   end
 
   def show
@@ -17,5 +21,10 @@ class ShirtsController < ApplicationController
     @shirt = Shirt.find(params[:id])
 
     @shirt.update_attributes!(params[:shirt])
+  end
+  
+protected
+  def record_shirts_viewed
+    user_session.viewed_shirts(@shirts)
   end
 end
