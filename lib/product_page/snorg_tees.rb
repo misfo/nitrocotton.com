@@ -39,6 +39,6 @@ class ProductPage::SnorgTees < ProductPage::Base
     thumbnails_page = open("http://www.snorgtees.com/#{thumbnails_iframe[:src]}").read
     filenames = thumbnails_page.scan(/['"]i_fullpic.php\?pi_fullpic=([^"']+)/).flatten
     filename = filenames.detect {|fn| fn =~ /\.gif$/i } || filenames[1]
-    "http://www.snorgtees.com/images/#{filename}"
+    URI.escape("http://www.snorgtees.com/images/#{filename}")
   end
 end
