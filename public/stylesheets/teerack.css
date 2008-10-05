@@ -30,8 +30,9 @@ a img {
   background-image: url(/images/tee-tile.png);
   padding: 9px 11px 11px 9px;
 }
-.tee_tile img.tee {
-  display: block;
+.tee_thumb {
+  height: 200px;
+  width: 200px;
 }
 .tee_tile .name {
   display: block;
