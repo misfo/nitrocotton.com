@@ -14,13 +14,4 @@ class ApplicationController < ActionController::Base
     def user_session
       @user_session ||= UserSession.new(session, request)
     end
-    
-    def current_user
-      user_session.user
-    end
-
-    # potentially saves a database call over current_user.id
-    def current_user_id
-      session[:user_id] || current_user.id
-    end
 end

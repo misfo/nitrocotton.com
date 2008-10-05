@@ -1,23 +1,2 @@
-<% for shirt in @shirts %>
-  <div class="tee_tile">
-    <div class="tee_thumb">
-      <%= link_to(image_tag(shirt.image.public_filename(:thumb), :alt => shirt.text), shirt.merchant_url,
-        :class => 'tee', :popup => true) %>
-    </div>
-    <span class="vote">
-      <%= link_to_remote(image_tag('thumb_up_28.png'),
-        :url => shirt_votes_path(shirt, :vote => 1), :method => :post,
-        :html => { :class => "vote#{' voted' if (shirt_vote = shirt.votes.by(current_user)) == 1}", :id => "thumb_up_#{shirt.id}" }) %>
-      <%= link_to_remote(image_tag('thumb_down_28.png'),
-        :url => shirt_votes_path(shirt, :vote => -1), :method => :post,
-        :html => { :class => "vote#{' voted' if shirt_vote == -1}", :id => "thumb_down_#{shirt.id}" }) %>
-    </span>
-    $<%= shirt.min_price %><br />
-    <%= link_to(shirt.merchant.name, shirt.merchant_url) %>
-<!--
-    <%= link_to(shirt.comments.size.zero? ? "No comments yet" : pluralize(shirt.comments.size, "comment"),
-      shirt_url(shirt), :class => 'comment_count') %>
--->
-  </div>
-<% end %>
+<%= render :partial => 'shirt', :collection => @shirts %>
 

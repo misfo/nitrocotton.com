@@ -1,12 +1,10 @@
 class ShirtsController < ApplicationController
-  after_filter :record_shirts_viewed, :only => :index
   
   def index
-    @shirts = Shirt.find_all_with_preference(
-      :prefer_high_rated => user_session.impress_me?,
-      :avoid_ids => user_session.viewed_shirt_ids,
-      :include => [:image, :votes],
-      :limit => 8)
+    @shirts = Shirt.find(:all,
+      :conditions => ["shirts.id NOT IN (SELECT shirt_id FROM votes WHERE user_id = ?)", user_session.user_id],
+      :include => :image, :limit => 8, :order => "RANDOM()")
+    user_session.teerack_ids = @shirts.collect(&:id)
   end
 
   def show
@@ -23,10 +21,5 @@ class ShirtsController < ApplicationController
     @shirt = Shirt.find(params[:id])
 
     @shirt.update_attributes!(params[:shirt])
-  end
-  
-protected
-  def record_shirts_viewed
-    user_session.viewed_shirts(@shirts)
   end
 end

@@ -1,7 +1,7 @@
 class UserSession
   def initialize(session, request)
     @session, @request = session, request
-    @session[:viewed_shirt_ids] ||= []
+    @session[:teerack_ids] ||= []
   end
   
   def user
@@ -13,16 +13,21 @@ class UserSession
       user
     end
   end
+
+  # could save a database call over #user.id
+  def user_id
+    @session[:user_id] || user.id
+  end
+
+  def teerack_ids
+    @session[:teerack_ids]
+  end
+
+  def teerack_ids=(ids)
+    @session[:teerack_ids] = ids
+  end
   
   def impress_me?
-    viewed_shirt_ids.size < 16
-  end
-  
-  def viewed_shirts(shirts)
-    @session[:viewed_shirt_ids] = @session[:viewed_shirt_ids] | shirts.collect(&:id)
-  end
-  
-  def viewed_shirt_ids
-    @session[:viewed_shirt_ids]
+    #TODO
   end
 end

@@ -2,12 +2,7 @@ class Shirt < ActiveRecord::Base
   belongs_to :merchant
   has_one :image, :dependent => :destroy
   has_many :comments
-  has_many :votes do
-    def by(user)
-      vote = detect {|v| v.user_id == user.id }
-      vote ? vote.vote : nil
-    end
-  end
+  has_many :votes
   has_and_belongs_to_many :labels
 
   validates_uniqueness_of :merchant_url
