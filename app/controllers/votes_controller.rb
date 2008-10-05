@@ -9,8 +9,9 @@ class VotesController < ApplicationController
       :conditions => ["shirts.id NOT IN (SELECT shirt_id FROM votes WHERE user_id = ?) AND shirts.id NOT IN (?)", user_session.user_id, user_session.teerack_ids],
       :include => :image, :order => "RANDOM()")
 
-    user_session.teerack_ids.delete(@vote.shirt_id)
-    user_session.teerack_ids << @shirt.id unless @shirt.nil?
-logger.debug "teerack_ids = #{user_session.teerack_ids.to_yaml}"
+    if @vote.vote < 0
+      user_session.teerack_ids.delete(@vote.shirt_id)
+      user_session.teerack_ids << @shirt.id unless @shirt.nil?
+    end
   end
 end

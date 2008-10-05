@@ -26,6 +26,10 @@ class UserSession
   def teerack_ids=(ids)
     @session[:teerack_ids] = ids
   end
+
+  def voted_on_all_displayed?
+    user.votes.count("*", :conditions => ["shirt_id IN (?)", teerack_ids]) == teerack_ids.size
+  end
   
   def impress_me?
     #TODO

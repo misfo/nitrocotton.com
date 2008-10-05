@@ -1,5 +1,10 @@
-if @shirt
-  page["tee_tile_#{@vote.shirt_id}"].replace :partial => 'shirts/shirt', :object => @shirt
-else
-  page["tee_tile_#{@vote.shirt_id}"].remove
+if @vote.vote < 0
+  if @shirt
+    page["tee_tile_#{@vote.shirt_id}"].replace :partial => 'shirts/shirt', :object => @shirt
+  else
+    page["tee_tile_#{@vote.shirt_id}"].remove
+  end
+elsif user_session.voted_on_all_displayed?
+  page[:flash_notice].replace_html "You've voted for all the shirts that are showing. #{link_to("Show more shirts", "/")}"
+  page[:flash_notice].show
 end

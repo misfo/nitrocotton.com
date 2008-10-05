@@ -17,6 +17,9 @@
       <%= image_tag 'logo.gif' %>
     </div>
     <div id="main">
+      <div id="flash_notice" style="display: <%= 'none' unless flash[:notice] %>;">
+        <%= flash[:notice] %>
+      </div>
       <%= yield %>
     </div>
   </body>
