@@ -1,2 +1,5 @@
-<%= render :partial => 'shirt', :collection => @shirts %>
+<div id="tee_tiles">
+  <%= render :partial => 'shirt', :collection => @shirts %>
+  <%= render :partial => 'end_of_the_road' if @shirts.size < 8 %>
+</div>
 
