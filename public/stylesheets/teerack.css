@@ -16,7 +16,12 @@ a img {
 }
 
 #top_navigation {
-  height: 80px;
+  height: 130px;
+}
+#logo {
+  position: relative;
+  top: -50px;
+  z-index: -1;
 }
 #top_navigation .adsense {
   float: right;
