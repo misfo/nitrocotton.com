@@ -18,10 +18,13 @@ class Image < ActiveRecord::Base
   end
 
   def update_file(url=original_url)
-    data = open(url)
-    self.content_type = data.content_type
-    self.filename     = File.basename(url)
-    self.original_url = url
-    self.temp_path    = data.path
+    io = open(url)
+    class << io
+      def original_filename
+        base_uri.path.split('/').last
+      end
+    end
+    self.uploaded_data = io
+    self.original_url  = url
   end
 end
