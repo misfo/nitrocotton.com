@@ -1,0 +1,1 @@
+page["shirt_#{params[:i]}"].replace_html "Ignored"

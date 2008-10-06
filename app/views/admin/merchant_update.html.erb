@@ -3,5 +3,7 @@
   <div id="shirt_<%= i %>">
     <%= link_to_remote(url.sub(@merchant.homepage_url, ""),
       :url => { :action => "fetch_shirt_info", :merchant_id => @merchant.id, :url => url, :i => i }) %>
+    <%= link_to_remote("ignore", :url => { :action => "ignore_url", :url => url, :i => i },
+      :confirm => %[Are you sure you want to ignore "#{url}"?]) %>
   </div>
 <% end -%>
