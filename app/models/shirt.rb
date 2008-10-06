@@ -1,8 +1,8 @@
 class Shirt < ActiveRecord::Base
   belongs_to :merchant
   has_one :image, :dependent => :destroy
-  has_many :comments
-  has_many :votes
+  has_many :comments, :dependent => :destroy
+  has_many :votes, :dependent => :destroy
   has_and_belongs_to_many :labels
 
   validates_uniqueness_of :merchant_url
