@@ -20,7 +20,7 @@ class ProductPage::SnorgTees < ProductPage::Base
  
   def min_price
     @min_price ||= begin
-      (@page / "td.pageHeading font").each do |font|
+      (@page / ".productSpecialPrice, td.pageHeading font").each do |font|
         text = font.inner_html.strip
         return text.sub("$", "") if text.starts_with?("$")
       end
