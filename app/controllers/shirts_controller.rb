@@ -10,6 +10,11 @@ class ShirtsController < ApplicationController
   def show
     @shirt = Shirt.find(params[:id])
   end
+  
+  def random
+    @shirt = Shirt.find(:first, :order => "RANDOM()")
+    render :action => 'show'
+  end
 
   def create
     @shirt = Shirt.new(params[:shirt])

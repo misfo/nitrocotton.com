@@ -28,7 +28,7 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => "shirts"
 
   map.resources :labels
-  map.resources :shirts, :has_many => :votes
+  map.resources :shirts, :collection => {:random => :get}, :has_many => :votes
 
   # See how all your routes lay out with "rake routes"
 
