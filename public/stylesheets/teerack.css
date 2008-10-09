@@ -30,16 +30,16 @@ a img {
 /* index page */
 .tee_tile {
   float: left;
-  width: 175px;
-  height: 175px;
+  background-color: white;
 }
-.tee_thumb {
+.tee_tile, .tee_thumb, .tee_thumb img, .tee_info {
   height: 175px;
   width: 175px;
 }
-.tee_thumb img {
-  height: 175px;
-  width: 175px;
+.tee_info {
+  position: relative;
+  top: -175px;
+  left: 0;
 }
 .tee_tile .name {
   display: block;
