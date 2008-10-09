@@ -36,20 +36,17 @@ a img {
   height: 175px;
   width: 175px;
 }
+.tee_thumb {
+  z-index: 1;
+}
 .tee_info {
+  z-index: 2;
   position: relative;
   top: -175px;
-  left: 0;
 }
-.tee_tile .name {
-  display: block;
-}
-.tee_tile .comment_count {
-  font-size: 0.8em;
-}
-.tee_tile .vote {
+.tee_info .vote {
   float: right;
-  margin-top: 4px;
+  margin: 2px;
 }
 .tee_tile .vote a.voted, .tee_tile .vote a.vote:hover {
   background-color: orange;

@@ -3,6 +3,15 @@
     <%= image_tag(shirt.image.public_filename(:thumb), :alt => shirt.text) %>
   </div>
   <div class="tee_info" style="display: none;">
-    <%= shirt.merchant.name %>
+    <div class="vote">
+      <%= link_to_remote(image_tag('thumb_up_36.png'),
+        :url => shirt_votes_path(shirt, :vote => 1), :method => :post,
+        :html => { :class => "vote", :id => "thumb_up_#{shirt.id}" },
+        :success => "showVote(#{shirt.id}, 'up')") %>
+      <%= link_to_remote(image_tag('thumb_down_36.png'),
+        :url => shirt_votes_path(shirt, :vote => -1), :method => :post,
+        :html => { :class => "vote", :id => "thumb_down_#{shirt.id}" },
+        :success => "showVote(#{shirt.id}, 'down')") %>
+    </div>
   </div>
 </div>
