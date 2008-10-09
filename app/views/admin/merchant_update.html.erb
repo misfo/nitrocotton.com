@@ -1,4 +1,8 @@
-<p>There are <%= pluralize(@new_urls.size, "new url") %>!</p>
+<ul>
+  <li><%= pluralize(@urls.size, "url") %></li>
+  <li><%= @urls.size - @real_urls.size %> were ignored</li>
+  <li><%= @new_urls.size %> are new</li>
+</ul>
 <% @new_urls.each_with_index do |url, i| -%>
   <div id="shirt_<%= i %>">
     <%= link_to_remote(url.sub(@merchant.homepage_url, ""),

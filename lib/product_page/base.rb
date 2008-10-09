@@ -12,10 +12,6 @@ class ProductPage::Base
     def merchant
       @merchant ||= Merchant.find_by_name(merchant_name)
     end
- 
-    def new_urls
-      urls - merchant.shirts.collect(&:merchant_url)
-    end
 
     def all
       #FIXME the urls are limited for testing

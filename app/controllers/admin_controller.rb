@@ -5,7 +5,10 @@ class AdminController < ApplicationController
 
   def merchant_update
     @merchant = Merchant.find(params[:id])
-    @new_urls = @merchant.parser.new_urls - IgnorableProduct.find_all_urls
+    
+    @urls      = @merchant.parser.urls
+    @real_urls = @urls - IgnorableProduct.find_all_urls
+    @new_urls  = @real_urls - @merchant.shirts.collect(&:merchant_url)
   end
 
   def ignore_url
