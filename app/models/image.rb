@@ -5,7 +5,7 @@ class Image < ActiveRecord::Base
 
   has_attachment :content_type => :image,
                  :resize_to => '450x550>',
-                 :thumbnails => {:thumb => '200x200!'},
+                 :thumbnails => {:thumb => '175x175!'},
                  :processor => 'Rmagick',
                  :storage => defined?(HerokuApp) ? 'heroku' : 'file_system',
                  :path_prefix => "public/images/shirts"

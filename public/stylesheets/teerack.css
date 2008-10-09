@@ -30,14 +30,16 @@ a img {
 /* index page */
 .tee_tile {
   float: left;
-  width: 200px;
-  height: 238px;
-  background-image: url(/images/tee-tile.png);
-  padding: 9px 11px 11px 9px;
+  width: 175px;
+  height: 175px;
 }
 .tee_thumb {
-  height: 200px;
-  width: 200px;
+  height: 175px;
+  width: 175px;
+}
+.tee_thumb img {
+  height: 175px;
+  width: 175px;
 }
 .tee_tile .name {
   display: block;

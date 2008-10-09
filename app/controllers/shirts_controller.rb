@@ -2,8 +2,8 @@ class ShirtsController < ApplicationController
   
   def index
     @shirts = Shirt.find(:all,
-      :conditions => ["shirts.id NOT IN (SELECT shirt_id FROM votes WHERE user_id = ?)", user_session.user_id],
-      :include => :image, :limit => 8, :order => "RANDOM()")
+      :conditions => ["shirts.id NOT IN (SELECT shirt_id FROM votes WHERE user_id = ? AND vote < 0)", user_session.user_id],
+      :include => :image, :limit => 25, :order => "RANDOM()")
     user_session.teerack_ids = @shirts.collect(&:id)
   end
 
