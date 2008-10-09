@@ -4,7 +4,7 @@ class ProductPage::SnorgTees < ProductPage::Base
  
     def urls
       home_page = Hpricot(open("http://www.snorgtees.com"))
-      (home_page / ".smallText a").collect {|a| a[:href][/^[^?]+/] }
+      (home_page / ".infoBox .smallText a").collect {|a| a[:href][/^[^?]+/] }
     end
   end
  
