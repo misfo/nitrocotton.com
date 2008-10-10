@@ -13,5 +13,8 @@
         :html => { :class => "vote", :id => "thumb_down_#{shirt.id}" },
         :success => "showVote(#{shirt.id}, 'down')") %>
     </div>
+    <div class="price">
+      <a href="<%= shirt.merchant_url %>"><%= price_range(shirt.min_price, shirt.max_price) %></a>
+    </div>
   </div>
 </div>

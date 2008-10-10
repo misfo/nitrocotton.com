@@ -48,6 +48,10 @@ a img {
   float: right;
   margin: 2px;
 }
+.tee_info .price {
+  color: green;
+  font-size: 22px;
+}
 .tee_tile .vote a.voted, .tee_tile .vote a.vote:hover {
   background-color: orange;
 }
