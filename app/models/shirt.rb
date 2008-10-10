@@ -10,6 +10,13 @@ class Shirt < ActiveRecord::Base
   after_create :associate_labels
   after_save :download_image
   
+  named_scope :not_voted_down_by, lambda { |user|
+    { :conditions => [
+      "shirts.id NOT IN (SELECT shirt_id FROM votes WHERE user_id = ? AND vote < 0)",
+      user.is_a?(User) ? user.id : user
+    ] }
+  }
+  
   class << self
     def find_all_with_preference(options)
       returning(shirts = []) do
