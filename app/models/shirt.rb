@@ -16,30 +16,18 @@ class Shirt < ActiveRecord::Base
       user.is_a?(User) ? user.id : user
     ] }
   }
+  named_scope :voted_up_by, lambda { |user|
+    { :conditions => [
+      "shirts.id IN (SELECT shirt_id FROM votes WHERE user_id = ? AND vote > 0)",
+      user.is_a?(User) ? user.id : user
+    ] }
+  }
   
   class << self
-    def find_all_with_preference(options)
-      returning(shirts = []) do
-        options[:order] = "RANDOM()"
-        avoid_ids = options.delete(:avoid_ids)
-        prefer_high_rated = options.delete(:prefer_high_rated)
-        if prefer_high_rated
-          top_16_ids = Vote.sum(:vote,
-            :group => :shirt_id,
-            :conditions => ["created_at > ?", 1.week.ago],
-            :order => "sum_vote DESC",
-            :limit => 16).collect(&:first)
-          shirts.push(*find(top_16_ids - (avoid_ids || []), options))
-        end
-        if shirts.size < options[:limit] && !avoid_ids.blank?
-          with_scope(:find => {:conditions => ["shirts.id NOT IN (?)", avoid_ids]}) do
-            shirts.push(*find(:all, options))
-          end
-        end
-        if shirts.size < options[:limit]
-          shirts.push(*find(:all, options.merge(:limit => options[:limit] - shirts.size)))
-        end
-      end
+    def top_rated_since(time, limit=nil)
+      all(:select => "sum(vote) AS sum_vote, shirt_id, shirts.*",
+        :conditions => ["votes.created_at > ?", time],
+        :joins => :votes, :group => :shirt_id, :order => "sum_vote DESC", :limit => limit)
     end
     
     def word_frequencies(freq_min = 2)
