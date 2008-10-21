@@ -11,8 +11,8 @@ xml.rss :version => "2.0" do
         xml.description(
           image_tag(shirt.image.public_filename) + "<br />" + shirt.description)
         xml.pubDate(shirt.created_at.to_s(:rfc822))
-        xml.link(formatted_shirt_url(shirt, :rss))
-        xml.guid(formatted_shirt_url(shirt, :rss))
+        xml.link(shirt_url(shirt))
+        xml.guid(shirt_url(shirt))
       end
     end
   end
