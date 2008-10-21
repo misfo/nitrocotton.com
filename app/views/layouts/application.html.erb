@@ -6,6 +6,7 @@
     <title><%= yield(:title) || "nitrocotton.com: find t-shirts that explode your torso off" %></title>
     <meta name="keywords" content="<%= yield(:keywords) || "t-shirts, tshirts, shirts, tees" %>" />
     <meta name="description" content="<%= yield(:description) || "Find the best t-shirts on the internet" %>" />
+    <link href="<%= formatted_shirts_path(:rss) %>" rel="alternate" type="application/rss+xml" title="New shirts feed" />
     <%= stylesheet_link_tag 'teerack' %>
     <%= javascript_include_tag 'prototype', 'teerack' %>
   </head>
