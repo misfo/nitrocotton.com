@@ -9,7 +9,7 @@ module Technoweenie # :nodoc:
         end
 
         module ClassMethods
-          # Yields a block containing an RMagick Image for the given binary data.
+          # Yields a block containing an Image Science image for the given binary data.
           def with_image(file, &block)
             ::ImageScience.with_image file, &block
           end
@@ -34,7 +34,7 @@ module Technoweenie # :nodoc:
             # supports.
             filename.sub! /gif$/, 'png'
             content_type.sub!(/gif$/, 'png')
-            self.temp_path = write_to_temp_file(filename)
+            temp_paths.unshift write_to_temp_file(filename)
             grab_dimensions = lambda do |img|
               self.width  = img.width  if respond_to?(:width)
               self.height = img.height if respond_to?(:height)
@@ -52,18 +52,7 @@ module Technoweenie # :nodoc:
               end
             else
               new_size = [img.width, img.height] / size.to_s
-              if size.ends_with? "!"
-                aspect = new_size[0].to_f / new_size[1].to_f
-                ih, iw = img.height, img.width
-                w, h = (ih * aspect), (iw / aspect)
-                w = [iw, w].min.to_i
-                h = [ih, h].min.to_i
-                img.with_crop( (iw-w)/2, (ih-h)/2, (iw+w)/2, (ih+h)/2) do |crop|
-                  crop.resize(new_size[0], new_size[1], &grab_dimensions )
-                end
-              else
-                img.resize(new_size[0], new_size[1], &grab_dimensions)
-              end
+              img.resize(new_size[0], new_size[1], &grab_dimensions)
             end
           end
       end
