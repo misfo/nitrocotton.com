@@ -1,5 +1,4 @@
 require 'open-uri'
-require 'hpricot'
 
 class ProductPage::Base
 
