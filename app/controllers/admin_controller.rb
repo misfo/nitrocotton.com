@@ -1,5 +1,7 @@
 class AdminController < ApplicationController
 
+  before_filter :authenticate
+  
   def index
   end
 
@@ -19,4 +21,12 @@ class AdminController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @shirt = @merchant.shirts.new_from_url(params[:url])
   end
+
+  private
+    def authenticate
+      authenticate_or_request_with_http_basic do |user_name, password|
+        user_name == "misfo" && password == "MoreShirts"
+      end
+    end
+
 end
