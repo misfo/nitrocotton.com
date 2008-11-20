@@ -6,7 +6,7 @@ class ShirtsController < ApplicationController
         @shirts = Shirt.not_voted_down_by(user_session.user_id).all(:include => :image, :limit => 16, :order => "RANDOM()")
       end
       format.rss do
-        @shirts = Shirt.all(:order => "created_at DESC")
+        @shirts = Shirt.all(:limit => 100, :order => "created_at DESC")
       end
     end
   end

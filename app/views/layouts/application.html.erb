@@ -5,7 +5,7 @@
     <title><%= yield(:title) || "nitrocotton.com: find t-shirts that explode your torso off" %></title>
     <meta name="keywords" content="<%= yield(:keywords) || "t-shirts, tshirts, shirts, tees" %>" />
     <meta name="description" content="<%= yield(:description) || "Find the best t-shirts on the internet" %>" />
-    <link href="<%= formatted_shirts_path(:rss) %>" rel="alternate" type="application/rss+xml" title="New shirts feed" />
+    <link href="http://feeds.feedburner.com/nitrocotton/newest_shirts" rel="alternate" type="application/rss+xml" title="New shirts feed" />
     <%= stylesheet_link_tag "style" %>
   <% if Rails.env == "production" %>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
@@ -23,7 +23,7 @@
       </div>
       <div><img src="/images/topleft.jpg" /></div>
       <div><img src="/images/header.jpg" /></div>
-      <div id="nav"><a href="<%= formatted_shirts_path(:rss) %>" style="float:right;"><img src="/images/nav_subscribe.jpg" /></a><a href="/" style="margin-right:37px;"><img src="/images/nav_random.jpg" /></a><a href="<%= fresh_shirts_path %>" style="margin-right:37px;"><img src="/images/nav_fresh.jpg" /></a><a href="<%= da_best_shirts_path %>"><img src="/images/nav_da_best.jpg" /></a></div>            
+      <div id="nav"><a href="http://feeds.feedburner.com/nitrocotton/newest_shirts" style="float:right;"><img src="/images/nav_subscribe.jpg" /></a><a href="/" style="margin-right:37px;"><img src="/images/nav_random.jpg" /></a><a href="<%= fresh_shirts_path %>" style="margin-right:37px;"><img src="/images/nav_fresh.jpg" /></a><a href="<%= da_best_shirts_path %>"><img src="/images/nav_da_best.jpg" /></a></div>            
       <div style="padding:30px 0;">
         <div id="flash_notice" style="display: <%= 'none' unless flash[:notice] %>;">
           <%= flash[:notice] %>
