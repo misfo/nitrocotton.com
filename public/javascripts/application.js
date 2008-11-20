@@ -12,9 +12,14 @@ $(function() {
   });
 
   $(".thumbs a").click(function() {
-    $.post($(this).attr('href') + '.js', {vote: ($(this).hasClass('thumbs_up') ? 1 : -1)});
-    $(this).siblings("a").removeClass('voted');
-    $(this).addClass('voted');
+    $("img", this).attr('src', "/images/progress.gif");
+    var thumbsUp = $(this).hasClass('thumbs_up');
+    var link = this;
+    $.post($(this).attr('href') + '.js', {vote: (thumbsUp ? 1 : -1)}, function () {
+      $("img", link).attr('src', "/images/thumbs_"+(thumbsUp ? "up" : "down")+".png");
+      $(link).siblings("a").removeClass('voted');
+      $(link).addClass('voted');
+    });
     return false;
   });
   if (typeof(initializeVotes) != "undefined") initializeVotes();
