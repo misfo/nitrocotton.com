@@ -4,8 +4,8 @@ class Image < ActiveRecord::Base
   belongs_to :shirt
 
   has_attachment :content_type => :image,
-                 :resize_to => '450x550>',
-                 :thumbnails => {:thumb => '175x175!'},
+                 :resize_to => '455x385>',
+                 :thumbnails => {:thumb => '167x167!'},
                  :processor => 'Rmagick',
                  :storage => defined?(HerokuApp) ? 'heroku' : 'file_system',
                  :path_prefix => "public/images/shirts"
@@ -17,7 +17,8 @@ class Image < ActiveRecord::Base
     end
   end
 
-  def update_file(url=original_url)
+  def update_file(url=nil)
+    url ||= original_url
     io = open(url)
     class << io
       def original_filename

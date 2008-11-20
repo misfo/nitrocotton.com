@@ -27,8 +27,8 @@ class UserSession
     @session[:teerack_ids] = ids
   end
   
-  def users_teerack_votes
-    user.votes.find(:all, :conditions => ["shirt_id IN (?)", teerack_ids])
+  def teerack_votes
+    @teerack_votes ||= user.votes.find(:all, :conditions => ["shirt_id IN (?)", teerack_ids])
   end
 
   def voted_on_all_displayed?

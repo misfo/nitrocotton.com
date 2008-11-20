@@ -1,20 +1,15 @@
-<div class="tee_tile" id="tee_tile_<%= shirt.id %>">
-  <div class="tee_thumb">
-    <%= image_tag(shirt.image.public_filename(:thumb), :alt => shirt.text) %>
-  </div>
-  <div class="tee_info" style="display: none;">
-    <div class="vote">
-      <%= link_to_remote(image_tag('thumb_up_36.png'),
-        :url => shirt_votes_path(shirt, :vote => 1), :method => :post,
-        :html => { :class => "vote", :id => "thumb_up_#{shirt.id}" },
-        :success => "showVote(#{shirt.id}, 'up')") %>
-      <%= link_to_remote(image_tag('thumb_down_36.png'),
-        :url => shirt_votes_path(shirt, :vote => -1), :method => :post,
-        :html => { :class => "vote", :id => "thumb_down_#{shirt.id}" },
-        :success => "showVote(#{shirt.id}, 'down')") %>
-    </div>
-    <div class="price">
-      <a href="<%= shirt.merchant_url %>"><%= price_range(shirt.min_price, shirt.max_price) %></a>
+<div class="pic">
+  <div class="picture" style="background:url(<%=h shirt.image.public_filename(:thumb) %>) top center no-repeat;" alt="<%=h shirt.text %>">
+    <div class="tee_overlay" style="display: none;">
+      <div class="tee_overlay_content">
+        <div class="thumbs">
+          <a href="<%= shirt_votes_path(shirt) %>" class="<%= vote_class(:up, shirt) %>"><img src="/images/thumbs_up.png" /></a>
+          <a href="<%= shirt_votes_path(shirt) %>" class="<%= vote_class(:down, shirt) %>"><img src="/images/thumbs_down.png" /></a>
+        </div>
+        <a href="<%=h shirt.merchant_url %>" class="merchant"><%=h shirt.merchant.name %></a>
+        <a href="<%=h shirt.merchant_url %>" class="price"><%= price_range(shirt.min_price, shirt.max_price) %></a>
+        <a href="<%= shirt_path(shirt) %>" class="comment_count"><%= pluralize(shirt.comments.size, "comment") %></a>
+      </div>	
     </div>
   </div>
 </div>

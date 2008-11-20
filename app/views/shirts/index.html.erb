@@ -1,13 +1,1 @@
-<div id="tee_tiles">
-  <%= render :partial => 'shirt', :collection => @shirts %>
-</div>
-
-<script type="text/javascript">
-  //<![CDATA[
-  document.observe("dom:loaded", function() {
-  <% for vote in user_session.users_teerack_votes -%>
-    showVote(<%= vote.shirt_id %>, '<%= vote.up? ? "up" : "down" %>');
-  <% end -%>
-  });
-  //]]>
-</script>
+<%= render :partial => @shirts %>
