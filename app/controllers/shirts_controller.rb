@@ -1,5 +1,4 @@
 class ShirtsController < ApplicationController
-  after_filter :update_teerack_ids, :only => [:index, :fresh, :da_best]
   
   def index
     respond_to do |format|
@@ -43,10 +42,4 @@ class ShirtsController < ApplicationController
     @shirt.update_attributes!(params[:shirt])
   end
 
-  protected
-    def update_teerack_ids
-      unless params[:format] && params[:format] != "html"
-        user_session.teerack_ids = @shirts.collect(&:id)
-      end
-    end
 end

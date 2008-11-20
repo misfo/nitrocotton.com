@@ -8,9 +8,12 @@ module ShirtsHelper
   end
 
   def vote_class(up_or_down, shirt)
-    voted = user_session.teerack_votes.any? do |v|
-      v.shirt_id == shirt.id && v.send("#{up_or_down}?")
-    end
+    voted = teerack_votes.any? {|v| v.shirt_id == shirt.id && v.send("#{up_or_down}?") }
     "thumbs_#{up_or_down}#{' voted' if voted}"
   end
+  
+  protected
+    def teerack_votes
+      @teerack_votes ||= user_session.user.votes.find_all_by_shirt_id(@shirts.collect(&:id))
+    end
 end
