@@ -20,8 +20,8 @@ class ShirtsController < ApplicationController
   def da_best
     @shirts = Shirt.all(
       :select => "shirts.*, sum(votes.vote) AS vote_sum",
-      :joins => "OUTER JOIN votes ON shirts.id = votes.shirt_id",
-      :group => "shirts.id",
+      :joins => "LEFT OUTER JOIN votes ON shirts.id = votes.shirt_id",
+      :group => Shirt.columns.collect {|c| "shirts.#{c.name}" }.join(", "),
       #:include => :image,
       :limit => 16,
       :order => "vote_sum DESC"
