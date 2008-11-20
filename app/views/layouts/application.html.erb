@@ -27,7 +27,7 @@
       </div>
       <div><img src="/images/topleft.jpg" /></div>
       <div><img src="/images/header.jpg" /></div>
-      <div id="nav"><a href="<%= formatted_shirts_path(:rss) %>" style="float:right;"><img src="/images/nav_subscribe.jpg" /></a><a href="#" style="margin-right:37px;"><img src="/images/nav_random.jpg" /></a><a href="#" style="margin-right:37px;"><img src="/images/nav_fresh.jpg" /></a><a href="#"><img src="/images/nav_da_best.jpg" /></a></div>						
+      <div id="nav"><a href="<%= formatted_shirts_path(:rss) %>" style="float:right;"><img src="/images/nav_subscribe.jpg" /></a><a href="/" style="margin-right:37px;"><img src="/images/nav_random.jpg" /></a><a href="<%= fresh_shirts_path %>" style="margin-right:37px;"><img src="/images/nav_fresh.jpg" /></a><a href="<%= da_best_shirts_path %>"><img src="/images/nav_da_best.jpg" /></a></div>						
       <div style="padding:30px 0;">
         <div id="flash_notice" style="display: <%= 'none' unless flash[:notice] %>;">
           <%= flash[:notice] %>
