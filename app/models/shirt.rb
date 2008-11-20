@@ -10,6 +10,11 @@ class Shirt < ActiveRecord::Base
   after_create :associate_labels
   after_save :download_image
   
+  named_scope :highest_rated, {
+    :select => "shirts.*, sum_vote",
+    :joins => "JOIN (SELECT shirt_id, sum(vote) AS sum_vote FROM votes GROUP BY shirt_id) AS votes ON shirts.id = shirt_id",
+    :order => "sum_vote DESC, created_at DESC"
+  }
   named_scope :not_voted_down_by, lambda { |user|
     { :conditions => [
       "shirts.id NOT IN (SELECT shirt_id FROM votes WHERE user_id = ? AND vote < 0)",
