@@ -29,12 +29,6 @@ class Shirt < ActiveRecord::Base
   }
   
   class << self
-    def top_rated_since(time, limit=nil)
-      all(:select => "sum(vote) AS sum_vote, shirt_id, shirts.*",
-        :conditions => ["votes.created_at > ?", time],
-        :joins => :votes, :group => :shirt_id, :order => "sum_vote DESC", :limit => limit)
-    end
-    
     def word_frequencies(freq_min = 2)
       find(:all).inject({}) do |words, shirt|
         shirt_words = shirt.text.downcase.scan(/[\w']{2,}/).uniq
