@@ -1,14 +1,92 @@
-<div id="shirt_info">
-  <h3>
-    "<%= @shirt.name %>" from
-    <a href="<%= @shirt.merchant.homepage_url %>" target="_blank"><%= @shirt.merchant.name %></a>
-  </h3>
-  <div>
-    <strong>Site's description</strong>
-    <p><%= @shirt.description || "<em>None available</em>" %></p>
+<div id="vote">
+  <div id="tab1" style="overflow: hidden; display: block;">
+    <div><img src="/images/who_should.jpg" /></div>
+  <% for celebrity in @celebrities %>
+    <a href="#" class="celeb"><img src="<%= celebrity.image_path %>" alt="<%= celebrity.name %>" /></a>
+  <% end %>
+    <div style="clear:both; height:1px; "><!-- --></div>
+    <div class="alignCenter"><a href="#"><img src="/images/btn_vote.jpg" /></a><a href="javascript:changeType('tab2')"><img src="/images/btn_view_results.jpg" /></a></div>
+  </div>
+  <div id="tab2" style="overflow: hidden; display: none;">
+    <div><img src="/images/who_should.gif"></div>
+      <a href="#" class="celeb" id="c13" onmouseover="javascript:changeborder('c13')" style="float:left "><img src="images/celeb_13.jpg" /></a>
+      <div class="vot" >
+        <strong style="color:#232020">Chuck Norris</strong><br />
+        <div class="yellow_bar">168 votes</div>
+      </div>
+    <div style="clear:both; height:1px; "><!-- --></div>
+      <a href="#" class="celeb" id="c14" onmouseover="javascript:changeborder('c14')" style="float:left "><img src="images/celeb_13.jpg" /></a>
+
+      <div class="vot" >
+        <strong style="color:#232020">Chuck Norris</strong><br />
+        <div class="yellow_bar">168 votes</div>
+      </div>
+    <div style="clear:both; height:1px; "><!-- --></div>
+      <a href="#" class="celeb" id="c15" onmouseover="javascript:changeborder('c15')" style="float:left "><img src="images/celeb_13.jpg" /></a>
+      <div class="vot" >
+        <strong style="color:#232020">Chuck Norris</strong><br />
+
+        <div class="yellow_bar">168 votes</div>
+      </div>
+    <div style="clear:both; height:1px; "><!-- --></div>
+      <a href="#" class="celeb" id="c16" onmouseover="javascript:changeborder('c16')" style="float:left "><img src="images/celeb_13.jpg" /></a>
+      <div class="vot" >
+        <strong style="color:#232020">Chuck Norris</strong><br />
+        <div class="yellow_bar">168 votes</div>
+
+      </div>
+    <div style="clear:both; height:1px; "><!-- --></div>
+    <div class="alignCenter"><a href="javascript:changeType('tab1')"><img src="/images/btn_vote.jpg" /></a></div>
   </div>
 </div>
-<div id="shirt_container">
-  <a href="<%= @shirt.merchant_url %>" target="_blank"><%= image_tag @shirt.image.public_filename %></a>
+
+<div id="full_pic">
+  <img src="<%= @shirt.image.public_filename %>" />
 </div>
+
+<div style="clear:left; padding-top:20px; text-align:center; width:500px; font-size:18px;"><strong>"<%=h @shirt.name %>"<br /><a href="<%= @shirt.merchant_url %>" style="color:#fcaf17; text-decoration:underline;">$15 from <%=h @shirt.merchant.name %></a></strong></div>
+<div style="clear:both;">&nbsp;</div>
+<% if @shirt.comments.empty? %>
+  <p style="font-style: italic;">Nobody has commented on this shirt</p>
+<% end %>
+<% for comment in @shirt.comments %>
+  <div class="comment">
+    <div class="user"><%= link_to_unless(comment.url.blank?, comment.name, comment.url) %>,  <%= time_ago_in_words comment.created_at %> ago</div>
+    <div class="text">
+      <%= simple_format comment.body %>
+      <a href="#"><strong>reply</strong></a>
+    </div>
+  </div>
+<% end %>
 <br />
+<div style="width:420px; margin:0 auto;">
+  <div><img src="/images/post_a_comment.jpg" /></div>
+
+  <form id="form1">
+    <table cellpadding="0" cellspacing="10">
+      <tr>
+        <td class="alignRight"><strong>Name:</strong></td>
+        <td><input type="text" /></td>
+      </tr>
+      <tr>
+        <td class="alignRight">Email:</td>
+
+        <td><input type="text" /></td>
+      </tr>
+      <tr>
+        <td class="alignRight">Url:</td>
+        <td><input type="text" /></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+
+          <strong>Comment:</strong><br />
+          <textarea style="width:330px; height:100px;"></textarea>
+        </td>
+      </tr>
+      <tr><td colspan="2"><small><strong>Note:</strong> We’d rather not moderate, but off-topic, blatantly inflammatory, or otherwise inappropriate or vapid comments may be removed. Repeat offenders will be banned from commenting. Let’s add value. Thank you.</small></td></tr>
+      <tr><td colspan="2" class="alignCenter"><br /><input type="image" src="/images/btn_post.jpg" /></td></tr>
+
+    </table>
+  </form>
+</div>

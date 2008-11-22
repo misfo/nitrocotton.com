@@ -31,6 +31,9 @@ a img {
 #nav {
   background:url(/images/bg_nav.gif) repeat-x;
 }
+#content {
+  padding: 30px 0;
+}
 #footer {
   border-top:1px solid #8c8c8c;
   padding:15px 0;
@@ -47,6 +50,14 @@ a img {
   padding:3px;
   float:left;
   margin:0 3px 10px 3px;
+}
+#full_pic {
+  width: 455px;
+  text-align: center;
+}
+#full_pic img {
+  border:1px solid #6f6f6f;
+  padding:3px;
 }
 .picture {
    width:167px;
@@ -99,7 +110,7 @@ a img {
 }
 .comment .user {
   padding-left:65px;
-  background:url(/images/bg_post_03.jpg) no-repeat;
+  background:url(/images/bg_post.jpg) no-repeat;
   height:32px;
   font-size:12px;
   line-height:32px;
@@ -131,12 +142,14 @@ a img {
   text-align:center;
 }
 #vote {
+  width: 251px;
   border:1px solid #6f6f6f;
   background:#f1f1f1;
   padding:3px;
   float:right;
 }
 .celeb {
+  float: left;
   border:3px solid #4d4d4d;
   margin:5px 0 0 5px;
   display:inline-block;
