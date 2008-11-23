@@ -23,7 +23,7 @@ class ShirtsController < ApplicationController
 
   def show
     @shirt = Shirt.find(params[:id])
-    @celebrities = Celebrity.all(:order => "RANDOM()")
+    @comment = Comment.new
   end
   
   def random

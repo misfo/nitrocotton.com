@@ -59,6 +59,17 @@ a img {
   border:1px solid #6f6f6f;
   padding:3px;
 }
+#shirt_header {
+  clear: left;
+  padding-top: 20px;
+  text-align: center;
+  width: 500px;
+  font-size: 18px;
+  font-weight: bold;
+}
+#shirt_header a {
+  color: #fcaf17;
+}
 .picture {
    width:167px;
    height:80px;
@@ -128,12 +139,21 @@ a img {
   text-decoration:underline;
   color:#fcaf17;
 }
-#form1 {
+#new_comment {
   margin:0;
   border:1px solid #6f6f6f;
   background:#f1f1f1;
   padding:20px 30px;
   font-size:12px;
+}
+#new_comment #comment_body {
+  width: 330px;
+  height: 100px;
+}
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
 }
 .alignRight {
   text-align:right;
@@ -174,4 +194,4 @@ a img {
    line-height:19px;
    margin-top:5px;
    padding-left:5px;  
-}    
+}

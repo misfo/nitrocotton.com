@@ -1,7 +1,7 @@
 <div id="vote">
   <div id="tab1" style="overflow: hidden; display: block;">
     <div><img src="/images/who_should.jpg" /></div>
-  <% for celebrity in @celebrities %>
+  <% for celebrity in Celebrity.all(:order => "RANDOM()") %>
     <a href="#" class="celeb"><img src="<%= celebrity.image_path %>" alt="<%= celebrity.name %>" /></a>
   <% end %>
     <div style="clear:both; height:1px; "><!-- --></div>
@@ -44,17 +44,25 @@
   <img src="<%= @shirt.image.public_filename %>" />
 </div>
 
-<div style="clear:left; padding-top:20px; text-align:center; width:500px; font-size:18px;"><strong>"<%=h @shirt.name %>"<br /><a href="<%= @shirt.merchant_url %>" style="color:#fcaf17; text-decoration:underline;">$15 from <%=h @shirt.merchant.name %></a></strong></div>
+<div id="shirt_header">
+  "<%=h @shirt.name %>"<br />
+  <a href="<%= @shirt.merchant_url %>">
+    <%= price_range(@shirt.min_price, @shirt.max_price) %> from <%=h @shirt.merchant.name %>
+  </a>
+</div>
 <div style="clear:both;">&nbsp;</div>
 <% if @shirt.comments.empty? %>
-  <p style="font-style: italic;">Nobody has commented on this shirt</p>
+  <p style="font-style: italic;">Nobody has commented on this shirt.  It must be really boring...</p>
 <% end %>
 <% for comment in @shirt.comments %>
   <div class="comment">
-    <div class="user"><%= link_to_unless(comment.url.blank?, comment.name, comment.url) %>,  <%= time_ago_in_words comment.created_at %> ago</div>
+    <div class="user">
+      <%= link_to_unless(comment.url.blank?, (comment.name.blank? ? content_tag(:strong, "A supsiciously secretive anonymous person") : comment.name), comment.url) %>,
+      <%= time_ago_in_words comment.created_at %> ago
+    </div>
     <div class="text">
       <%= simple_format comment.body %>
-      <a href="#"><strong>reply</strong></a>
+      <!-- <a href="#"><strong>reply</strong></a> -->
     </div>
   </div>
 <% end %>
@@ -62,31 +70,27 @@
 <div style="width:420px; margin:0 auto;">
   <div><img src="/images/post_a_comment.jpg" /></div>
 
-  <form id="form1">
+  <% form_for([@shirt, @comment]) do |f| %>
     <table cellpadding="0" cellspacing="10">
       <tr>
-        <td class="alignRight"><strong>Name:</strong></td>
-        <td><input type="text" /></td>
+        <td class="alignRight">Name:</td>
+        <td><%= f.text_field :name %></td>
       </tr>
       <tr>
         <td class="alignRight">Email:</td>
-
-        <td><input type="text" /></td>
+        <td><%= f.text_field :email %></td>
       </tr>
       <tr>
         <td class="alignRight">Url:</td>
-        <td><input type="text" /></td>
+        <td><%= f.text_field :url %></td>
       </tr>
       <tr>
         <td colspan="2">
-
           <strong>Comment:</strong><br />
-          <textarea style="width:330px; height:100px;"></textarea>
+          <%= f.text_area :body %>
         </td>
       </tr>
-      <tr><td colspan="2"><small><strong>Note:</strong> We’d rather not moderate, but off-topic, blatantly inflammatory, or otherwise inappropriate or vapid comments may be removed. Repeat offenders will be banned from commenting. Let’s add value. Thank you.</small></td></tr>
       <tr><td colspan="2" class="alignCenter"><br /><input type="image" src="/images/btn_post.jpg" /></td></tr>
-
     </table>
-  </form>
+  <% end %>
 </div>
