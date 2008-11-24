@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
       redirect_to @shirt
     else
       @shirt.comments(true)
-      render :file => "#{Rails.root}/app/views/shirts/show.html.erb", :layout => true
+      render :template => "shirts/show"
     end
   end
 
