@@ -43,8 +43,8 @@ class Shirt < ActiveRecord::Base
   attr_accessor :image_url
   attr_accessor :label_names
 
-  def voted_celebrities
-    Celebrity.all(:select => %["celebrities".*, votes], :order => "votes DESC", :joins =>
+  def voted_celebrities(limit = nil)
+    Celebrity.all(:select => %["celebrities".*, votes], :order => "votes DESC", :limit => limit, :joins =>
       "JOIN (SELECT celebrity_id, count(id) AS votes FROM celeb_votes WHERE shirt_id = #{id} GROUP BY celebrity_id) AS celeb_votes ON id = celebrity_id")
   end
 

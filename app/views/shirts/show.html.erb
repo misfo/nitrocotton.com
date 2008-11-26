@@ -2,8 +2,8 @@
   <div style="overflow: hidden;">
     <div><img src="/images/who_should.jpg"></div>
   <% if params[:celeb] == "results" || (@celeb_vote.celebrity && params[:celeb] != "vote") %>
-  <% for celebrity in @shirt.voted_celebrities %>
-    <a href="#" class="celeb" style="float:left"><img src="<%= celebrity.image_path %>" /></a>
+  <% for celebrity in @shirt.voted_celebrities(4) %>
+    <div class="celeb" style="float:left"><img src="<%= celebrity.image_path %>" /></div>
     <div class="vot">
       <strong style="color:#232020"><%= celebrity.name %></strong><br />
       <div class="yellow_bar" style="width: <%= vote_bar_width celebrity.votes %>px;"><%= pluralize(celebrity.votes, "vote") %></div>
@@ -21,7 +21,7 @@
         <%= f.hidden_field :celebrity_id %>
         <input type="image" src="/images/btn_vote.jpg" />
       <% end %>
-      <a href="<%= url_for :vote => 'results' %>"><img src="/images/btn_view_results.jpg" /></a>
+      <a href="<%= url_for :celeb => 'results' %>"><img src="/images/btn_view_results.jpg" /></a>
     </div>
   <% end %>
   </div>
