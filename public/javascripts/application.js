@@ -9,6 +9,8 @@ $(function() {
     $(".tee_overlay", this).show();
   }).mouseout(function() {
     $(".tee_overlay", this).hide();
+  }).click(function() {
+    window.location.href = $("a.comment_count", this).attr("href");
   });
 
   $(".thumbs a").click(function() {
