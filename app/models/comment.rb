@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  #TODO belongs_to :user
+  
   validates_length_of :name, :maximum => 30, :allow_blank => true
   validates_format_of :url, :with => /\Ahttps?:\/\//, :allow_blank => true
   validates_length_of   :body, :in => 1..5000
