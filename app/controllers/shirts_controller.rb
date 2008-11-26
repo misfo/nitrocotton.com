@@ -3,7 +3,9 @@ class ShirtsController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @shirts = Shirt.not_voted_down_by(user_session.user_id).all(:include => :image, :limit => 16, :order => "RANDOM()")
+        @shirts = Shirt.
+          unvoted_and_voted_up_by(user_session.user_id).
+          all(:include => :image, :limit => 16, :order => "vote DESC, RANDOM()")
       end
       format.rss do
         @shirts = Shirt.all(:limit => 50, :order => "created_at DESC")

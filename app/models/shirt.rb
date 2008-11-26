@@ -16,6 +16,11 @@ class Shirt < ActiveRecord::Base
     :joins => "JOIN (SELECT shirt_id, sum(vote) AS sum_vote FROM votes GROUP BY shirt_id) AS votes ON shirts.id = shirt_id",
     :order => "sum_vote DESC, created_at DESC"
   }
+  #TODO benchmark this scope compared to the next
+  named_scope :unvoted_and_voted_up_by, lambda { |user| {
+    :joins => "LEFT JOIN (SELECT shirt_id, vote FROM votes WHERE user_id = #{user.is_a?(User) ? user.id : user}) AS votes ON shirts.id = shirt_id",
+    :conditions => "vote IS NULL OR vote >= 0"
+  } }
   named_scope :not_voted_down_by, lambda { |user|
     { :conditions => [
       "shirts.id NOT IN (SELECT shirt_id FROM votes WHERE user_id = ? AND vote < 0)",
