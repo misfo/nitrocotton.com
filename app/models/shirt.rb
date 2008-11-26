@@ -1,6 +1,7 @@
 class Shirt < ActiveRecord::Base
   belongs_to :merchant
   has_one :image, :dependent => :destroy
+  has_many :celeb_votes, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   has_many :votes, :dependent => :destroy
   has_and_belongs_to_many :labels
@@ -41,6 +42,14 @@ class Shirt < ActiveRecord::Base
 
   attr_accessor :image_url
   attr_accessor :label_names
+
+  def voted_celebrities
+    Celebrity.all(
+      :select => "celebrities.*, votes",
+      :joins => "JOIN (SELECT celebrity_id, count(id) AS votes FROM celeb_votes WHERE shirt_id = #{id} GROUP BY celebrity_id) ON id = celebrity_id",
+      :order => "votes"
+    )
+  end
 
 protected
   def associate_labels

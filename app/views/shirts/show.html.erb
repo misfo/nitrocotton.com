@@ -1,43 +1,33 @@
 <div id="vote">
-  <div id="tab1" style="overflow: hidden; display: block;">
-    <div><img src="/images/who_should.jpg" /></div>
-  <% for celebrity in Celebrity.all(:order => "RANDOM()") %>
-    <a href="#" class="celeb"><img src="<%= celebrity.image_path %>" alt="<%= celebrity.name %>" /></a>
+<% if @celeb_vote.celebrity %>
+  <div style="overflow: hidden;">
+    <div><img src="/images/who_should.jpg"></div>
+  <% for celebrity in @shirt.voted_celebrities %>
+    <a href="#" class="celeb" style="float:left"><img src="<%= celebrity.image_path %>" /></a>
+    <div class="vot">
+      <strong style="color:#232020"><%= celebrity.name %></strong><br />
+      <div class="yellow_bar"><%= pluralize(celebrity.votes, "vote") %></div>
+    </div>
+    <div style="clear:both; height:1px; "><!-- --></div>
   <% end %>
-    <div style="clear:both; height:1px; "><!-- --></div>
-    <div class="alignCenter"><a href="#"><img src="/images/btn_vote.jpg" /></a><a href="javascript:changeType('tab2')"><img src="/images/btn_view_results.jpg" /></a></div>
-  </div>
-  <div id="tab2" style="overflow: hidden; display: none;">
-    <div><img src="/images/who_should.gif"></div>
-      <a href="#" class="celeb" id="c13" onmouseover="javascript:changeborder('c13')" style="float:left "><img src="images/celeb_13.jpg" /></a>
-      <div class="vot" >
-        <strong style="color:#232020">Chuck Norris</strong><br />
-        <div class="yellow_bar">168 votes</div>
-      </div>
-    <div style="clear:both; height:1px; "><!-- --></div>
-      <a href="#" class="celeb" id="c14" onmouseover="javascript:changeborder('c14')" style="float:left "><img src="images/celeb_13.jpg" /></a>
-
-      <div class="vot" >
-        <strong style="color:#232020">Chuck Norris</strong><br />
-        <div class="yellow_bar">168 votes</div>
-      </div>
-    <div style="clear:both; height:1px; "><!-- --></div>
-      <a href="#" class="celeb" id="c15" onmouseover="javascript:changeborder('c15')" style="float:left "><img src="images/celeb_13.jpg" /></a>
-      <div class="vot" >
-        <strong style="color:#232020">Chuck Norris</strong><br />
-
-        <div class="yellow_bar">168 votes</div>
-      </div>
-    <div style="clear:both; height:1px; "><!-- --></div>
-      <a href="#" class="celeb" id="c16" onmouseover="javascript:changeborder('c16')" style="float:left "><img src="images/celeb_13.jpg" /></a>
-      <div class="vot" >
-        <strong style="color:#232020">Chuck Norris</strong><br />
-        <div class="yellow_bar">168 votes</div>
-
-      </div>
-    <div style="clear:both; height:1px; "><!-- --></div>
     <div class="alignCenter"><a href="javascript:changeType('tab1')"><img src="/images/btn_vote.jpg" /></a></div>
   </div>
+<% else %>
+  <div style="overflow: hidden; display: block;">
+    <div><img src="/images/who_should.jpg" /></div>
+  <% for celebrity in Celebrity.all(:order => "RANDOM()") %>
+    <div id="celebrity_<%= celebrity.id %>" class="celeb"><img src="<%= celebrity.image_path %>" alt="<%= celebrity.name %>" /></div>
+  <% end %>
+    <div style="clear:both; height:1px; "><!-- --></div>
+    <div class="alignCenter">
+      <% form_for([@shirt, @celeb_vote]) do |f| %>
+        <%= f.hidden_field :celebrity_id %>
+        <input type="image" src="/images/btn_vote.jpg" />
+      <% end %>
+      <a href="javascript:changeType('tab2')"><img src="/images/btn_view_results.jpg" /></a>
+    </div>
+  </div>
+<% end %>
 </div>
 
 <div id="full_pic">

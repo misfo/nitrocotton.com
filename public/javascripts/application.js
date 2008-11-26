@@ -23,4 +23,12 @@ $(function() {
     return false;
   });
   if (typeof(initializeVotes) != "undefined") initializeVotes();
+
+  $(".celeb").click(function() {
+    var celebId = this.id.match(/\d+$/)[0];
+
+    $(".celeb").removeClass('selected_celeb');
+    $(this).addClass('selected_celeb');
+    $("#celeb_vote_celebrity_id").attr('value', celebId);
+  });
 });

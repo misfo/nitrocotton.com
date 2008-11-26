@@ -23,6 +23,7 @@ class ShirtsController < ApplicationController
 
   def show
     @shirt = Shirt.find(params[:id])
+    @celeb_vote = @shirt.celeb_votes.find_or_initialize_by_user_id(user_session.user_id)
     @comment = Comment.new
   end
   

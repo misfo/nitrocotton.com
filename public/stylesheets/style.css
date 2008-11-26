@@ -173,11 +173,13 @@ a img {
   border:3px solid #4d4d4d;
   margin:5px 0 0 5px;
   display:inline-block;
+  cursor: pointer;
 }
-.celebo {
-  border:3px solid #fcaf17;
-  margin:5px 0 0 5px;
-  display:inline-block;
+.selected_celeb {
+  border-color: #fcaf17;
+}
+#new_celeb_vote {
+  display: inline;
 }
 .vot {
    display:inline-block;
