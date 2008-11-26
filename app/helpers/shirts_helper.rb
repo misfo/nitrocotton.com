@@ -6,6 +6,12 @@ module ShirtsHelper
   def price_range(min, max)
     [price(min), price(max)].uniq.join("-")
   end
+  
+  def vote_bar_width(votes)
+    # assumes it gets the highest number of votes first
+    @max_votes ||= votes.to_i.to_f
+    (votes.to_i / @max_votes * 145).round
+  end
 
   def vote_class(up_or_down, shirt)
     voted = teerack_votes.any? {|v| v.shirt_id == shirt.id && v.send("#{up_or_down}?") }

@@ -6,7 +6,7 @@
     <a href="#" class="celeb" style="float:left"><img src="<%= celebrity.image_path %>" /></a>
     <div class="vot">
       <strong style="color:#232020"><%= celebrity.name %></strong><br />
-      <div class="yellow_bar"><%= pluralize(celebrity.votes, "vote") %></div>
+      <div class="yellow_bar" style="width: <%= vote_bar_width celebrity.votes %>px;"><%= pluralize(celebrity.votes, "vote") %></div>
     </div>
     <div style="clear:both; height:1px; "><!-- --></div>
   <% end %>
