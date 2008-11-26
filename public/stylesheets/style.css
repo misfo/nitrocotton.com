@@ -178,7 +178,7 @@ a img {
 .selected_celeb {
   border-color: #fcaf17;
 }
-#new_celeb_vote {
+#new_celeb_vote, .edit_celeb_vote {
   display: inline;
 }
 .vot {
