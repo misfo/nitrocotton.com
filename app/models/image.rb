@@ -7,8 +7,8 @@ class Image < ActiveRecord::Base
                  :resize_to => '455x385>',
                  :thumbnails => {:thumb => '167x167!'},
                  :processor => 'Rmagick',
-                 :storage => defined?(HerokuApp) ? :s3 : :file_system,
-                 :path_prefix => defined?(HerokuApp) ? "shirts" : "public/images/shirts"
+                 :storage => Rails.env.eql?("production") || defined?(HerokuApp) ? :s3 : :file_system,
+                 :path_prefix => Rails.env.eql?("production") || defined?(HerokuApp) ? "shirts" : "public/images/shirts"
 
   def self.create_from_url(url)
     returning image = new(:original_url => url) do
