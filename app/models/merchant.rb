@@ -1,5 +1,5 @@
 class Merchant < ActiveRecord::Base
-  has_many :shirts do
+  has_many :shirts, :dependent => :destroy do
     def new_from_url(url)
       page = proxy_owner.parser.new(url)
       new(
