@@ -37,7 +37,7 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_torcot_session',
+    :session_key => '_nitrocotton_session',
     :secret      => '9b9caa2d07de0085e3a026e14b2a2f52b316893765dbcfa6de0b02bc93a60213631f8c8945a2385fb7ca830389e891bc25200b99b908e2d820064b2a7d6d4876'
   }
 
@@ -46,6 +46,7 @@ Rails::Initializer.run do |config|
   # (create the session table with 'rake db:sessions:create')
   # config.action_controller.session_store = :active_record_store
 
+  config.gem 'aws-s3', :lib => 'aws/s3'
   config.gem 'hpricot'
 
   # Use SQL instead of Active Record's schema dumper when creating the test database.
