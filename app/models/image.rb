@@ -28,4 +28,10 @@ class Image < ActiveRecord::Base
     self.uploaded_data = io
     self.original_url  = url
   end
+  
+  def update_file!(url=nil)
+    update_file(url)
+    self.updated_at = Time.now
+    save!
+  end
 end
