@@ -1,7 +1,6 @@
 config/amazon_s3.yml
 config/database.yml
 db/*.sqlite3
-db/data.yml
 log
 public/images/shirts
 tmp
