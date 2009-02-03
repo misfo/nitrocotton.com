@@ -35,6 +35,16 @@ class Shirt < ActiveRecord::Base
   }
   
   class << self
+    def page_exists?(url)
+      case url
+      when /^http:\/\/www\.typetees\.com\//i
+        threadless_id = ProductPage::TypeTees.id_from_url(url)
+        exists?(["merchant_url LIKE ?", "http://www.typetees.com/product/#{threadless_id}/%"])
+      else
+        exists?(:merchant_url => url)
+      end
+    end
+    
     def word_frequencies(freq_min = 2)
       find(:all).inject({}) do |words, shirt|
         shirt_words = shirt.text.downcase.scan(/[\w']{2,}/).uniq

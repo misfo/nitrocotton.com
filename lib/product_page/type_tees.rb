@@ -6,6 +6,10 @@ class ProductPage::TypeTees < ProductPage::Base
       typetees_page = Hpricot.XML(open("http://feeds.feedburner.com/TypeTees"))
       (typetees_page / "feedburner:origLink").collect(&:inner_html)
     end
+    
+    def id_from_url(url)
+      url[/\/product\/(\d+)\//, 1]
+    end
   end
 
   def name
@@ -36,6 +40,6 @@ class ProductPage::TypeTees < ProductPage::Base
   end
   
   def threadless_id
-    @url[/\/product\/(\d+)\//, 1]
+    id_from_url(@url)
   end
 end
