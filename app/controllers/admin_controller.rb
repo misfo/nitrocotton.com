@@ -10,7 +10,10 @@ class AdminController < ApplicationController
     
     @urls      = @merchant.parser.urls
     @real_urls = @urls - IgnorableProduct.find_all_urls
-    @new_urls  = @real_urls - @merchant.shirts.collect(&:merchant_url)
+    @new_urls  = begin
+      existing_urls = @merchant.shirts.collect {|s| s.merchant_url.downcase }
+      @real_urls.reject {|u| existing_urls.include?(u.downcase) }
+    end
   end
 
   def ignore_url
