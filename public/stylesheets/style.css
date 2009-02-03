@@ -83,12 +83,12 @@ a img {
   background: none;
 }  
 .tee_overlay_content {
-   text-align:center;
-   height: 60px;
-   padding: 3px 0;
-   font-size:12px;
-   color:#fcaf17;
-   background:url(/images/trans.png) no-repeat;
+  text-align:center;
+  height: 60px;
+  padding: 3px 0 3px 5px;
+  font-size:12px;
+  color:#fcaf17;
+  background:url(/images/trans.png) no-repeat;
 }
 .tee_overlay_content a {
   text-decoration: none;
@@ -112,6 +112,11 @@ a img {
   color: white;
   font-size: 14px;
   font-weight: bold;
+}
+.added_time {
+  color: white;
+  font-style: italic;
+  font-size: 11px;
 }
 .comment_count {
   color: #FCAF17;

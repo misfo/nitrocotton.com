@@ -7,7 +7,11 @@
           <a href="<%= shirt_votes_path(shirt) %>" class="<%= vote_class(:down, shirt) %>" rel="nofollow"><img src="/images/thumbs_down.png" /></a>
         </div>
         <a href="<%=h shirt.merchant_url %>" class="merchant"><%=h shirt.merchant.name %></a>
+      <% if params[:action] == "fresh" %>
+        <div class="added_time">added <%= time_ago_in_words shirt.created_at %> ago</div>
+      <% else %>
         <a href="<%=h shirt.merchant_url %>" class="price"><%= price_range(shirt.min_price, shirt.max_price) %></a>
+      <% end %>
         <a href="<%= shirt_path(shirt, :anchor => "disqus_thread") %>" class="comment_count">View Comments</a>
       </div>  
     </div>
