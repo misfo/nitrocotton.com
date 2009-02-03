@@ -40,6 +40,6 @@ class ProductPage::TypeTees < ProductPage::Base
   end
   
   def threadless_id
-    id_from_url(@url)
+    self.class.id_from_url(@url)
   end
 end
