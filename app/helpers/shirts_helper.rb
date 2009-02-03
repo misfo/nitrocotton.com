@@ -1,10 +1,16 @@
 module ShirtsHelper
   def price(number)
-    number % 1 == 0 ? "$#{number.to_i}" : number_to_currency(number)
+    if price.nil? || price.zero?
+      nil
+    elsif number % 1 == 0
+      "$#{number.to_i}"
+    else
+      number_to_currency(number)
+    end
   end
   
   def price_range(min, max)
-    [price(min), price(max)].uniq.join("-")
+    [price(min), price(max)].compact.uniq.join("-")
   end
   
   def vote_bar_width(votes)
