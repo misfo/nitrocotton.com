@@ -38,46 +38,5 @@
   </a>
 </div>
 <div style="clear:both;">&nbsp;</div>
-<% if @shirt.comments.empty? %>
-  <p style="font-style: italic;">Nobody has commented on this shirt.  It must be really boring...</p>
-<% end %>
-<% for comment in @shirt.comments %>
-  <div class="comment">
-    <div class="user">
-      <%= link_to_unless(comment.url.blank?, (comment.name.blank? ? content_tag(:strong, "A supsiciously secretive anonymous person") : comment.name), comment.url) %>,
-      <%= time_ago_in_words comment.created_at %> ago
-    </div>
-    <div class="text">
-      <%= simple_format comment.body %>
-      <!-- <a href="#"><strong>reply</strong></a> -->
-    </div>
-  </div>
-<% end %>
-<br />
-<div style="width:420px; margin:0 auto;">
-  <div><img src="/images/post_a_comment.jpg" /></div>
-
-  <% form_for([@shirt, @comment]) do |f| %>
-    <table cellpadding="0" cellspacing="10">
-      <tr>
-        <td class="alignRight">Name:</td>
-        <td><%= f.text_field :name %></td>
-      </tr>
-      <tr>
-        <td class="alignRight">Email:</td>
-        <td><%= f.text_field :email %></td>
-      </tr>
-      <tr>
-        <td class="alignRight">Url:</td>
-        <td><%= f.text_field :url %></td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <strong>Comment:</strong><br />
-          <%= f.text_area :body %>
-        </td>
-      </tr>
-      <tr><td colspan="2" class="alignCenter"><br /><input type="image" src="/images/btn_post.jpg" /></td></tr>
-    </table>
-  <% end %>
+  <%= disqus_thread %>
 </div>

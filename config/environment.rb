@@ -47,6 +47,7 @@ Rails::Initializer.run do |config|
   # config.action_controller.session_store = :active_record_store
   
   config.gem 'aws-s3', :lib => 'aws/s3'
+  config.gem 'disqus'
   config.gem 'hpricot'
 
   # Use SQL instead of Active Record's schema dumper when creating the test database.
@@ -69,4 +70,10 @@ Rails::Initializer.run do |config|
     :user_name      => "robot@nitrocotton.com",
     :password       => "GleepGlorp"
   } if Rails.env.eql?("production")
+
+  config.after_initialize do
+    Disqus::defaults[:account] = "nitrocotton"
+    # Optional, only if you're using the API
+    #Disqus::defaults[:api_key] = "my_disqus_api_key"
+  end
 end
