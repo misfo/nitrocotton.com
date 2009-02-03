@@ -1,6 +1,6 @@
-class ProductPage::Threadless < ProductPage::Base
+class ProductPage::TypeTees < ProductPage::Base
   class << self
-    def merchant_name() "Threadless" end
+    def merchant_name() "TypeTees" end
 
     def urls
       typetees_page = Hpricot.XML(open("http://feeds.feedburner.com/TypeTees"))
