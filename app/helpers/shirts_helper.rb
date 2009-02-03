@@ -1,6 +1,6 @@
 module ShirtsHelper
   def price(number)
-    if price.nil? || price.zero?
+    if number.nil? || number.zero?
       nil
     elsif number % 1 == 0
       "$#{number.to_i}"
