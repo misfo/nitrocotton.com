@@ -8,7 +8,7 @@
         </div>
         <a href="<%=h shirt.merchant_url %>" class="merchant"><%=h shirt.merchant.name %></a>
         <a href="<%=h shirt.merchant_url %>" class="price"><%= price_range(shirt.min_price, shirt.max_price) %></a>
-        <a href="<%= shirt_path(shirt) %>" class="comment_count"><%= pluralize(shirt.comments.size, "comment") %></a>
+        <a href="<%= shirt_path(shirt, :anchor => "disqus_thread") %>" class="comment_count">View Comments</a>
       </div>  
     </div>
   </div>
