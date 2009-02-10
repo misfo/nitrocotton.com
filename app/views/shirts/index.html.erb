@@ -1,4 +1,8 @@
 <%= render :partial => @shirts %>
 
+<% if params[:action] == "index" %>
+  <div id="more_random"><%= link_to("more random shirts...") %></div>
+<% end %>
+
 <%= disqus_comment_counts %>
 

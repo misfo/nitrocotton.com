@@ -7,6 +7,9 @@ body {
   background:url(/images/bg_body.gif) top repeat-x;
   font:11px Tahoma;
 }
+a {
+  color:#666666;
+}
 a img {
   border:none;
 }
@@ -22,7 +25,6 @@ a img {
   height:20px;
 }
 #account a {
-  text-decoration:underline;
   color:#FFFFFF;
 }
 .orange {
@@ -34,15 +36,15 @@ a img {
 #content {
   padding: 30px 0;
 }
+#more_random {
+  text-align: right;
+  font-size: 20px;
+}
 #footer {
   border-top:1px solid #8c8c8c;
   padding:15px 0;
   text-align:center;
   color:#666666;
-}
-#footer a {
-  color:#666666;
-  text-decoration:underline;
 }
 .pic {
   display: block;
@@ -133,7 +135,6 @@ a img {
 }
 .comment .user a {
   color:#000000;
-  text-decoration:underline;
   font-weight:bold;
 }
 .comment .text {
@@ -141,7 +142,6 @@ a img {
   padding-left:25px;
 }
 .comment .text a {
-  text-decoration:underline;
   color:#fcaf17;
 }
 #new_comment {
