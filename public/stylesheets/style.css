@@ -47,6 +47,7 @@ a img {
   color:#666666;
 }
 .pic {
+  cursor: pointer;
   display: block;
   border:1px solid #6f6f6f;
   padding:3px;
