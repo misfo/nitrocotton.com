@@ -59,15 +59,10 @@ Rails::Initializer.run do |config|
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
 
-  # Gmail settings only if running on Heroku
-  config.action_mailer.smtp_settings = {
-    :address        => "smtp.gmail.com",
-    :port           => 587,
-    :domain         => "robot@nitrocotton.com",
-    :authentication => :plain,
-    :user_name      => "robot@nitrocotton.com",
-    :password       => "GleepGlorp"
-  } if Rails.env.eql?("production")
+  if Rails.env.eql?("production")
+    config.action_mailer.smtp_settings = 
+      YAML.load_file(File.join(File.dirname(__FILE__), 'smtp.yml'))
+  end
 
   config.after_initialize do
     Disqus::defaults[:account] = "nitrocotton"
