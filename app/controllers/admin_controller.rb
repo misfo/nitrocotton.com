@@ -24,9 +24,13 @@ class AdminController < ApplicationController
 
   private
     def authenticate
-      authenticate_or_request_with_http_basic do |user_name, password|
-        user_name == "misfo" && password == "MoreShirts"
+      authenticate_or_request_with_http_basic do |username, password|
+        [username, password] == admin_credentials.values_at('username', 'password')
       end
+    end
+
+    def admin_credentials
+      @admin_credentials ||= YAML::load_file(File.join(Rails.root, "config", "admin.yml"))
     end
 
 end
