@@ -36,10 +36,8 @@ Rails::Initializer.run do |config|
   # If you change this key, all old sessions will become invalid!
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
-  config.action_controller.session = {
-    :session_key => '_nitrocotton_session',
-    :secret      => '9b9caa2d07de0085e3a026e14b2a2f52b316893765dbcfa6de0b02bc93a60213631f8c8945a2385fb7ca830389e891bc25200b99b908e2d820064b2a7d6d4876'
-  }
+  config.action_controller.session =
+    YAML.load_file(File.join(File.dirname(__FILE__), 'session.yml'))
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
