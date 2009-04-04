@@ -18,4 +18,4 @@ config.action_controller.perform_caching             = true
 # config.action_mailer.raise_delivery_errors = false
 
 config.action_mailer.smtp_settings =
-  YAML.load_file(File.join(File.dirname(__FILE__), 'smtp.yml'))
+  YAML.load_file(File.join(File.dirname(__FILE__), '..', 'smtp.yml'))
