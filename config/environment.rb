@@ -59,11 +59,6 @@ Rails::Initializer.run do |config|
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
 
-  if Rails.env.eql?("production")
-    config.action_mailer.smtp_settings = 
-      YAML.load_file(File.join(File.dirname(__FILE__), 'smtp.yml'))
-  end
-
   config.after_initialize do
     Disqus::defaults[:account] = "nitrocotton"
     # Optional, only if you're using the API
